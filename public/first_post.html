@@ -1,0 +1,101 @@
+<html>
+  <head>
+    <title>RubyRevealed | A shared diary of a pair programming experiment</title>
+  </head>
+  <body>
+    <h1>RubyRevaled</h1>
+    <h2>A shared diary of a pair programming experiment</h2>
+
+    <p>
+      RubyRevealed is a story about how two friends, Adam Dalton and Andy Davis, developed this blog. 
+      Ideally, if one were to follow this blog from start to finish at any time, you would have an exact
+      copy of this site.
+    </p>
+    
+    <section>
+      <h3>So, let's dive right in</h3>
+
+      <h4>DigitalOcean</h4>
+      <p>
+        It all starts with a Virtual Private Server (VPS). For this tutorial, we will be using the amazingly priced
+        <a href="http://digitalocean.com">Digital Ocean</a> to host our website. Create an account and then proceed
+        by creating a new Droplet. We set our hostname to be "rubyrevealed" and selected the following option.
+      </p>
+
+      <img src="/images/droplet_type.png" />
+
+      <p>
+        Okay, next you need to select the desired region, we simply choose New York 1 since it was closer to us. Lastly
+        select a droplet image. For this tutorial, we'll be using Ubuntu 12.10 x64 Server, shown below.
+      </p>      
+
+      <img src="/images/droplet_image.png" />
+
+      <p>
+        Once you click "Create Droplet" at the bottom, you will have your root password emailed to you in plain text. So it is
+        strongly advised that you change it.
+      </p>
+
+      <pre>
+        $ ssh root@[ip-address]
+        $ passwd
+        Enter new UNIX password:
+        Retype new UNIX password:
+        passwd: password updated successfully
+      </pre>
+
+      <p>
+        Okay, let's install Vim, update our apt package database, and install the latest updates (if there are any).
+      <p>
+
+      <pre>
+        $ apt-get install vim-nox
+        $ apt-get update
+        $ apt-get upgrade
+      </pre>
+
+      <p>
+        If you see that a new kernel gets installed as part of the updates, you should reboot the system afterwards:
+      </p>
+
+      <pre>
+        $ reboot
+      </pre>
+
+      <h4>Apache</h4>
+      <p>
+        Okay, time to install Apache. We will eventually be installing Ruby on Rails to build this blog, so we followed some of
+        this <a href="https://help.ubuntu.com/community/RubyOnRails#Apache">Ubuntu community guide</a>.
+      </p>
+
+      <pre>
+        $ sudo apt-get install apache2 apache2-mpm-prefork apache2-prefork-dev
+      </pre>
+
+      <p>
+        Okay, if you own your own domain name, this is where we directed "rubyrevealed.com" to point to our new DigitalOcean server.
+        We purchased the domain through DreamHost.com. We found this 
+        <a href="https://www.digitalocean.com/community/articles/how-to-set-up-a-host-name-with-digitalocean">How to Set Up a Host Name with Digital Ocean</a>
+        guide pretty useful. Step 2 shows the Digital Ocean nameservers that you'll want to set at the place you registered your domain (DreamHost for us).
+        Execute Step 3 and then you'll most likely just need to wait a few hours for the new nameservers to kick in.
+      </p>
+
+      <h4>HTML Time</h4>
+
+      <p>
+        In order to create this page, you'll want to modify the <pre>/var/www/index.html</pre> to look like the
+        <a href="view-source:http://rubyrevealed.com/">source of this page (for Chrome and Firefox users)</a>
+        For other browsers, just right click anywhere on the page and click "View Source".
+      <p>
+
+      <p>
+        Feel free to also create a new directory <pre>/var/www/images</pre> to put your images in for now.
+        You can download ours here: <br />
+          <a href="http://rubyrevealed.com/images/droplet_type.png">Droplet Type</a><br />
+          <a href="http://rubyrevealed.com/images/droplet_image.png">Droplet Image</a>
+      </p>
+
+    </section>
+    
+  </body>
+</html>
