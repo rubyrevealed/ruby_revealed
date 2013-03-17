@@ -45,3 +45,8 @@ gem "database_cleaner", ">= 0.9.1", :group => :test
 gem "email_spec", ">= 1.4.0", :group => :test
 gem "bootstrap-sass", ">= 2.3.0.0"
 gem "simple_form", ">= 2.0.4"
+gem "quiet_assets", ">= 1.0.1", :group => :development
+gem "better_errors", ">= 0.6.0", :group => :development
+gem "binding_of_caller", ">= 0.7.1", :group => :development, :platforms => [:mri_19, :rbx]
+gem "libv8", ">= 3.11.8"
+gem "therubyracer", ">= 0.11.3", :group => :assets, :platform => :ruby, :require => "v8"
