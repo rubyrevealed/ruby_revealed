@@ -100,10 +100,11 @@
   store our rails application. Also delete the first post and it's images we made previously, as we'll need that to be
   removed for us to display our rails app. We'll have you download a copy of it near the end of this post.
 
-%pre.prettyprint-lang-sh
-  $ mkdir -p /var/www/app/rails
-  $ rm /var/www/index.html
-  $ rm -rf /var/www/images
+%pre.prettyprint-lang-sh 
+  = preserve do
+    $ mkdir -p /var/www/app/rails
+    $ rm /var/www/index.html
+    $ rm -rf /var/www/images
 
 %h2 Rails Ready
 %p
