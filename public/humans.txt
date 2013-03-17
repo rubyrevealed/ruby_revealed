@@ -3,10 +3,11 @@
 
 
 /* TEAM */
-  <your title>: <your name>
-  Site:
-  Twitter:
-  Location:
+  Author: Adam Dalton
+  Author: Andrew Davis
+  Site: RubyRevealed
+  Twitter: https://twitter.com/Rubyrevealed
+  Location: http://rubyrevealed.com
 
 /* THANKS */
   Daniel Kehoe (@rails_apps) for the RailsApps project

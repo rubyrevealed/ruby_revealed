@@ -11,25 +11,21 @@ set :use_sudo, false
 default_run_options[:pty] = true
 
 set :keep_releases, 10
-set :deploy_to, "/var/www/apps/rails/#{application}"
+set :deploy_to, "/var/www/apps/rails/\#{application}"
 
 server 'rubyrevealed.com', :app, :web, :db, primary: true
 
 namespace :deploy do
   task :symlink_shared, roles: :app do
-    run <<-CMD
-        ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml
-    CMD
+    run "ln -s \#{shared_path}/config/database.yml \#{release_path}/config/database.yml"
   end
 
   task :precompile_assets, roles: :app do
-    run <<-CMD
-      cd #{release_path} && bundle exec rake assets:precompile RAILS_ENV=production
-    CMD
+    run "cd \#{release_path} && bundle exec rake assets:precompile RAILS_ENV=production"
   end
 
   task :restart do
-    run "touch #{current_path}/tmp/restart.txt"
+    run "touch \#{current_path}/tmp/restart.txt"
   end
 end
 
