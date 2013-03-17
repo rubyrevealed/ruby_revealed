@@ -297,7 +297,7 @@ Add this line:
 %pre.prettyprint.lang-haml
   = preserve do
     <strong>app/views/layouts/application.html.haml</strong>
-    \!!!
+    \!!!5
     \%html
     \  %head
     \    %title RubyRevealed
@@ -312,13 +312,17 @@ Add this line:
     \          = render 'layouts/navigation'
     \    #main
     \      .container
-    \        .content
-    \          .row
-    \            .span12
-    \              = render 'layouts/messages'
-    \              = yield
-    \          %footer
-    \            %strong Created by Andy Davis & Adam Dalton
+    \        .well
+    \          RubyRevealed is a story about how two friends, Adam Dalton and Andy Davis, developed this blog.
+    \          In theory, if one were to follow this blog from start to finish at any time, you would have an exact
+    \          copy of this site.
+    \        .well
+    \          = render 'layouts/messages'
+    \          = yield
+    \
+    \        %footer
+    \          %strong Created by Andy Davis & Adam Dalton
+    \
     \    = javascript_include_tag 'prettyify'
 
 %p
@@ -339,6 +343,19 @@ Add this line:
 
 %pre.prettyprint.lang-css
   \*= require prettyify
+
+%p
+  Let's fix up some other styles real quick. Remove the <code>.content</code> section in
+  <code>app/assets/stylesheets/application.css.scss</code>. We also like to remove extra comments.
+
+%pre.prettyprint.lang-css
+  = preserve do
+    \// app/assets/stylesheets/application.css.scss
+    \/*
+    \ *= require_self
+    \ *= require bootstrap_and_overrides
+    \ *= require prettyify
+    \*/
 
 %p
   Next, let's add some code to make our 2nd blog post the static page that appears at the root. We'll just use the
@@ -449,6 +466,14 @@ Before we actually add the content of this blog post to the page, let's setup ou
   Download our
   = link_to 'first_post.html', '/archive/first_post.html'
   and place it in <code>public/archive/</code>. (You'll need to create the <strong>archive</strong> directory)
+
+%p
+  And since we are making a blog that contains how it was made, you need to also put our current post,
+  <code>app/views/application/index.html.haml</code> into
+  <code>public/archive/second_post.html.haml</code> so it can be downloaded.
+
+%p
+  Yes, it's like traveling through time and space.
 
 %p
   Then download the images,

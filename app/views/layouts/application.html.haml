@@ -13,13 +13,16 @@
           = render 'layouts/navigation'
     #main
       .container
-        .content
-          .row
-            .span12
-              = render 'layouts/messages'
-              = yield
-          %footer
-            %strong Created by Andy Davis & Adam Dalton
+        .well
+          RubyRevealed is a story about how two friends, Adam Dalton and Andy Davis, developed this blog.
+          In theory, if one were to follow this blog from start to finish at any time, you would have an exact
+          copy of this site.
+        .well
+          = render 'layouts/messages'
+          = yield
+
+        %footer
+          %strong Created by Andy Davis & Adam Dalton
 
     = javascript_include_tag 'prettyify'
 
