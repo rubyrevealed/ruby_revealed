@@ -2,7 +2,7 @@ require 'rvm/capistrano'
 require 'bundler/capistrano'
 
 set :application, 'RubyRevealed'
-set :repository,  'git@github.com:ardavis/ruby_revealed.git'
+set :repository,  'git@github.com:rubyrevealed/ruby_revealed.git'
 
 set :scm, :git
 set :user, 'server'
