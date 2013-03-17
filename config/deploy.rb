@@ -1,3 +1,4 @@
+require 'rvm/capistrano'
 require 'bundler/capistrano'
 
 set :application, 'RubyRevealed'
@@ -13,3 +14,24 @@ set :keep_releases, 10
 set :deploy_to, "/var/www/apps/rails/#{application}"
 
 server 'rubyrevealed.com', :app, :web, :db, primary: true
+
+namespace :deploy do
+  task :symlink_shared, roles: :app do
+    run <<-CMD
+        ln -s #{shared_path}/config/database.yml #{release_path}/config/database.yml
+    CMD
+  end
+
+  task :precompile_assets, roles: :app do
+    run <<-CMD
+      cd #{release_path} && bundle exec rake assets:precompile RAILS_ENV=production
+    CMD
+  end
+
+  task :restart do
+    run "touch #{current_path}/tmp/restart.txt"
+  end
+end
+
+after 'deploy:symlink', 'deploy:symlink_shared'
+after 'deploy:symlink_shared', 'deploy:precompile_assets'
