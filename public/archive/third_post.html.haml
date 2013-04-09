@@ -68,8 +68,16 @@
   but still have access to the first and second posts. Soon we'll be using a database, but for now, we are going to put
   our third post <b>Directly above</b> the second post, in the same file. So open up
   <code>app/views/application/index.html.haml</code> and paste in
-  = link_to 'this code', 'public/archive/third_post.html.haml'
+  = link_to 'this code', '/archive/third_post.html.haml'
   at the very top, so it'll look like we have two posts in one.
+
+%p
+  In order to deploy our application successfuly, we need to let rake precompile our extra assets. Go into
+  <code>config/application.rb</code> and find or modify the <code>config.assets.precompile</code> line to look like the
+  following:
+
+%pre.prettyprint.lang-rb
+  config.assets.precompile += ['prettyify.js', 'google_analytics.js']
 
 %p
   To allow others to download this from your website, you'll also want to paste the third_post.html.haml contents into
