@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-gem 'rails', '3.2.12'
+gem 'rails', '3.2.13'
 gem 'rvm-capistrano'
 gem 'pg', '>= 0.14.1'
 gem 'haml-rails', '>= 0.4'

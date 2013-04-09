@@ -1,0 +1,80 @@
+%h1 Third Post: Google Analytics
+
+%p
+  Hello again from RubyRevealed! This is part 3 in a continuous series of blog posts that will guide you step by
+  step in creating this very website. In this post, we'll learn about adding Google Analytics to our Rails app. If this
+  is your first time here, please check out our
+  = link_to 'second_post', '#second_post'
+  or
+  = link_to 'first post.', 'archive/first_post.html'
+
+%p
+  First things first, let's upgrade Rails to the latest version to avoid security vulnerabilities. Modify your Gemfile
+  to reflect this:
+
+%pre.prettyprint.lang-rb
+  = preserve do
+    :escaped
+      gem 'rails', '3.2.13'
+
+%p
+  Then run:
+
+%pre.prettyprint.lang-sh
+  $ bundle update rails       # Ensure you are in the root directory of your Rails application
+
+%p
+  Okay, let's sign up for a Google Analytics account. Head over to
+  = link_to 'their website', 'google.com/analytics'
+  and sign in with your Google account. Simply fill out the form and click <b>Get Tracking ID</b>, and read through the
+  terms of service (yes, we know you want to).
+
+%p
+  Now we need to add our Google Analytics tracker to our application. Make a file, <code>app/assets/javascripts/google_analytics.js.coffee</code> and
+  paste in this code, be sure to replace the UA tracker and domain name at the bottom with your own.
+
+%pre.prettyprint.lang-js
+  = preserve do
+    :escaped
+      ((i, s, o, g, r, a, m) ->
+        i["GoogleAnalyticsObject"] = r
+        i[r] = i[r] or ->
+          (i[r].q = i[r].q or []).push arguments_
+
+        i[r].l = 1 * new Date()
+
+        a = s.createElement(o)
+        m = s.getElementsByTagName(o)[0]
+
+        a.async = 1
+        a.src = g
+        m.parentNode.insertBefore a, m
+      ) window, document, "script", "//www.google-analytics.com/analytics.js", "ga"
+      ga "create", "UA-xxxxxxxx-x", "your-domain-name.com"
+      ga "send", "pageview"
+
+%p
+  Next you'll need to require this new JavaScript file in your application. According to the
+  = link_to 'Google Analytics Tracking Overview', 'https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingOverview'
+  we want to include our new file just before the end of our layout file, <code>app/views/layouts/application.html.haml</code>
+  Place it just before the prettyify inclusion, like so:
+
+%pre.prettyprint.lang-js
+  \= javascript_include_tag 'prettyify'
+  \= javascript_include_tag 'google_analytics'
+
+%p
+  Okay, now that this is in place, let's do some cleaning up. We want to ensure our readers can see this third post,
+  but still have access to the first and second posts. Soon we'll be using a database, but for now, we are going to put
+  our third post <b>Directly above</b> the second post, in the same file. So open up
+  <code>app/views/application/index.html.haml</code> and paste in
+  = link_to 'this code', 'public/archive/third_post.html.haml'
+  at the very top, so it'll look like we have two posts in one.
+
+%p
+  To allow others to download this from your website, you'll also want to paste the third_post.html.haml contents into
+  <code>public/archive/third_post.html.haml</code>
+
+#second_post
+%br
+%br
