@@ -30,38 +30,27 @@
   terms of service (yes, we know you want to).
 
 %p
-  Now we need to add our Google Analytics tracker to our application. Make a file, <code>app/assets/javascripts/google_analytics.js.coffee</code> and
+  Now we need to add our Google Analytics tracker to our application. Make a file, <code>app/assets/javascripts/google_analytics.js</code> and
   paste in this code, be sure to replace the UA tracker and domain name at the bottom with your own.
 
 %pre.prettyprint.lang-js
   = preserve do
     :escaped
-      ((i, s, o, g, r, a, m) ->
-        i["GoogleAnalyticsObject"] = r
-        i[r] = i[r] or ->
-          (i[r].q = i[r].q or []).push arguments_
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-        i[r].l = 1 * new Date()
-
-        a = s.createElement(o)
-        m = s.getElementsByTagName(o)[0]
-
-        a.async = 1
-        a.src = g
-        m.parentNode.insertBefore a, m
-      ) window, document, "script", "//www.google-analytics.com/analytics.js", "ga"
-      ga "create", "UA-xxxxxxxx-x", "your-domain-name.com"
-      ga "send", "pageview"
+      ga('create', 'UA-xxxxxxxx-x', 'your-domain.com');
+      ga('send', 'pageview');
 
 %p
-  Next you'll need to require this new JavaScript file in your application. According to the
-  = link_to 'Google Analytics Tracking Overview', 'https://developers.google.com/analytics/devguides/collection/gajs/gaTrackingOverview'
-  we want to include our new file just before the end of our layout file, <code>app/views/layouts/application.html.haml</code>
-  Place it just before the prettyify inclusion, like so:
+  Next you'll need to require this new JavaScript file in your application. We want to include our new file just before
+  the end of our application javascript manifest file, <code>app/assets/javascripts/application.js</code>
+  Put it at the end of the <code>require</code> statements.
 
 %pre.prettyprint.lang-js
-  \= javascript_include_tag 'prettyify'
-  \= javascript_include_tag 'google_analytics'
+  \//= require google_analytics
 
 %p
   Okay, now that this is in place, let's do some cleaning up. We want to ensure our readers can see this third post,
@@ -70,14 +59,6 @@
   <code>app/views/application/index.html.haml</code> and paste in
   = link_to 'this code', '/archive/third_post.html.haml'
   at the very top, so it'll look like we have two posts in one.
-
-%p
-  In order to deploy our application successfuly, we need to let rake precompile our extra assets. Go into
-  <code>config/application.rb</code> and find or modify the <code>config.assets.precompile</code> line to look like the
-  following:
-
-%pre.prettyprint.lang-rb
-  config.assets.precompile += ['prettyify.js', 'google_analytics.js']
 
 %p
   To allow others to download this from your website, you'll also want to paste the third_post.html.haml contents into
