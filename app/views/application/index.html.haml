@@ -31,7 +31,7 @@
 
 %p
   Now we need to add our Google Analytics tracker to our application. Paste this in <code>app/views/layouts/application.html.haml</code>
-  right underneath the <code>= csrf_meta_tags</code>
+  right underneath the <code>= csrf_meta_tags</code>, remember to place the UA tag and the domain with your own.
 
 %pre.prettyprint.lang-js
   = preserve do
@@ -42,7 +42,7 @@
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-        ga('create', 'UA-39982110-1', 'rubyrevealed.com');
+        ga('create', 'UA-xxxxxxxx-x', 'your-domain-name.com');
         ga('send', 'pageview');
 
 %p
